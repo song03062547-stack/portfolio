@@ -2,125 +2,408 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ปฐมพงศ์ ชัยสรรค์ | ผลงานรายวิชา</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ปฐมพงศ์ ชัยสรรค์ | Portfolio ผลงานรายวิชา</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#141b34; --blue:#3b5bdb; --blue-d:#2f49b0; --mint:#0ca678;
-  --bg:#f6f7fb; --card:#fff; --line:#e1e5f0; --muted:#5c6482;
+:root {
+  --bg-main: #0b0f19;
+  --bg-sidebar: #111827;
+  --bg-card: #1f2937;
+  --bg-card-hover: #2d3748;
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-glow: rgba(99, 102, 241, 0.25);
+  --accent-hero: #f59e0b;
+  --mint: #10b981;
+  --mint-bg: rgba(16, 185, 129, 0.15);
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-sub: #d1d5db;
+  --border-line: #374151;
+  --sidebar-width: clamp(280px, 22vw, 340px);
 }
-*{box-sizing:border-box;margin:0}
-body{font-family:'IBM Plex Sans Thai',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
-a{color:inherit;text-decoration:none}
-a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
-.layout{display:grid;grid-template-columns:320px 1fr;min-height:100vh}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-aside{background:var(--ink);color:#fff;padding:48px 32px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:20px}
-.mono{width:84px;height:84px;border-radius:20px;background:var(--blue);display:grid;place-items:center;font-size:2.4rem;font-weight:700}
-aside h1{font-size:1.65rem;line-height:1.35;font-weight:700}
-.en{color:#9fb0ff;font-size:.95rem;margin-top:-12px}
-.facts{display:grid;gap:10px;font-size:.92rem;border-top:1px solid rgba(255,255,255,.15);padding-top:20px}
-.facts div{display:flex;justify-content:space-between;gap:12px}
-.facts span:first-child{color:#aab2d3}
-.facts span:last-child{text-align:right;font-weight:500}
-.gh{margin-top:auto;display:inline-block;text-align:center;padding:10px 16px;border-radius:10px;background:#fff;color:var(--ink);font-weight:600}
-.gh:hover{background:#e7ebff}
+body {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+}
 
-main{padding:56px 48px 40px;max-width:820px}
-main h2{font-size:1.8rem;font-weight:700}
-.lead{color:var(--muted);margin:6px 0 32px}
+a { color: inherit; text-decoration: none; }
 
-.work{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px 24px 92px;margin-bottom:18px}
-.work .n{position:absolute;left:26px;top:22px;font-family:'IBM Plex Mono',monospace;font-size:2.2rem;color:var(--blue)}
-.work h3{font-size:1.2rem;font-weight:600;line-height:1.4}
-.work p{color:var(--muted);font-size:.95rem;margin:4px 0 12px}
-.kind{display:inline-block;font-size:.78rem;font-weight:600;color:var(--mint);background:#e3f8f0;border-radius:6px;padding:0 9px;margin-bottom:6px}
-.btns{display:flex;flex-wrap:wrap;gap:8px}
-.btn{padding:7px 16px;border-radius:9px;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:#fff}
-.btn:hover{background:#eef1ff}
-.btn.main{background:var(--blue);border-color:var(--blue);color:#fff}
-.btn.main:hover{background:var(--blue-d)}
-.work.hero{border:2px solid var(--blue)}
+/* Grid Layout รองรับทุกขนาดจอ */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  min-height: 100vh;
+}
 
-footer{color:var(--muted);font-size:.85rem;margin-top:28px}
+/* Sidebar Styling */
+aside {
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-line);
+  padding: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 32px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
 
-@media(max-width:860px){
-  .layout{grid-template-columns:1fr}
-  aside{position:static;height:auto;padding:32px 24px}
-  .gh{margin-top:0}
-  main{padding:32px 20px}
-  .work{padding:20px 20px 20px 20px}
-  .work .n{position:static;display:block;font-size:1.5rem;margin-bottom:2px}
+.profile-avatar {
+  width: clamp(64px, 6vw, 84px);
+  height: clamp(64px, 6vw, 84px);
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 10px 25px -5px var(--accent-glow);
+}
+
+aside h1 {
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  line-height: 1.3;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.en-name {
+  color: var(--accent-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: -12px;
+}
+
+.facts {
+  display: grid;
+  gap: 12px;
+  font-size: 0.88rem;
+  border-top: 1px solid var(--border-line);
+  padding-top: 20px;
+}
+
+.facts-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.facts-label { color: var(--text-muted); }
+.facts-val { text-align: right; font-weight: 500; color: var(--text-sub); }
+
+.gh-btn {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.gh-btn:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+/* Main Content Area */
+main {
+  padding: clamp(32px, 5vw, 64px) clamp(24px, 5vw, 64px);
+  max-width: 1100px;
+  width: 100%;
+}
+
+main h2 {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.lead {
+  color: var(--text-muted);
+  margin: 6px 0 32px;
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+}
+
+/* Works Card Styling */
+.works-list {
+  display: grid;
+  gap: 20px;
+}
+
+.work-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: 16px;
+  padding: clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px) clamp(70px, 6vw, 92px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,0.5), 0 0 20px 0 var(--accent-glow);
+}
+
+.work-card .num {
+  position: absolute;
+  left: clamp(20px, 3vw, 28px);
+  top: clamp(18px, 2.8vw, 26px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.kind-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--mint);
+  background: var(--mint-bg);
+  border-radius: 6px;
+  padding: 2px 10px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.work-card h3 {
+  font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.work-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 6px 0 16px;
+}
+
+.btns-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid var(--border-line);
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #374151;
+  border-color: #4b5563;
+  transform: translateY(-1px);
+}
+
+.btn.primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.btn.primary:hover {
+  background: var(--accent-primary-hover);
+  border-color: var(--accent-primary-hover);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* Hero Card Highlight */
+.work-card.hero {
+  border: 1.5px solid var(--accent-hero);
+  background: linear-gradient(180deg, var(--bg-card) 0%, rgba(31, 41, 55, 0.8) 100%);
+}
+
+.work-card.hero .num {
+  color: var(--accent-hero);
+}
+
+.work-card.hero:hover {
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,0.5), 0 0 25px 0 rgba(245, 158, 11, 0.2);
+}
+
+footer {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-line);
+}
+
+/* Responsive Breakpoints สำหรับจอมือถือและแท็บเล็ต */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  
+  aside {
+    position: relative;
+    height: auto;
+    padding: 32px 24px;
+  }
+
+  .gh-btn {
+    margin-top: 10px;
+  }
+
+  main {
+    padding: 32px 20px;
+  }
+
+  .work-card {
+    padding: 20px;
+  }
+
+  .work-card .num {
+    position: static;
+    display: inline-block;
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
 }
 </style>
 </head>
 <body>
+
 <div class="layout">
 
+  <!-- Sidebar แสดงข้อมูลส่วนตัว -->
   <aside>
-    <div class="mono" aria-hidden="true">ป</div>
-    <h1>ปฐมพงศ์<br>ชัยสรรค์</h1>
-    <p class="en">Patomphong Chaisan</p>
-    <div class="facts">
-      <div><span>รหัสนักศึกษา</span><span>664245039</span></div>
-      <div><span>หมู่เรียน</span><span>66/44</span></div>
-      <div><span>คณะ</span><span>วิทยาศาสตร์และเทคโนโลยี</span></div>
-      <div><span>สาขา</span><span>วิทยาการคอมพิวเตอร์</span></div>
+    <div class="profile-avatar" aria-hidden="true">ป</div>
+    <div>
+      <h1>ปฐมพงศ์<br>ชัยสรรค์</h1>
+      <p class="en-name">Patomphong Chaisan</p>
     </div>
-    <a class="gh" href="https://github.com/song03062547-stack" target="_blank" rel="noopener">GitHub โปรไฟล์ ↗</a>
+    
+    <div class="facts">
+      <div class="facts-row">
+        <span class="facts-label">รหัสนักศึกษา</span>
+        <span class="facts-val">664245039</span>
+      </div>
+      <div class="facts-row">
+        <span class="facts-label">หมู่เรียน</span>
+        <span class="facts-val">66/44</span>
+      </div>
+      <div class="facts-row">
+        <span class="facts-label">คณะ</span>
+        <span class="facts-val">วิทยาศาสตร์และเทคโนโลยี</span>
+      </div>
+      <div class="facts-row">
+        <span class="facts-label">สาขา</span>
+        <span class="facts-val">วิทยาการคอมพิวเตอร์</span>
+      </div>
+    </div>
+
+    <a class="gh-btn" href="https://github.com/song03062547-stack" target="_blank" rel="noopener">
+      <span>GitHub โปรไฟล์</span> ↗
+    </a>
   </aside>
 
+  <!-- Main Content ส่วนแสดงผลงาน -->
   <main>
     <h2>ผลงานรายวิชา</h2>
-    <p class="lead">5 ชิ้นงาน เปิดดูไฟล์จาก GitHub ได้เลย</p>
-    <div id="list"></div>
-    <footer>เผยแพร่ผ่าน GitHub Pages</footer>
+    <p class="lead">5 ชิ้นงานย่อย สามารถคลิกเปิดดูซอร์สโค้ด เอกสาร หรือเว็บแอปได้ทันที</p>
+    
+    <div class="works-list" id="list"></div>
+    
+    <footer>เผยแพร่ผ่าน GitHub Pages | Nakhon Pathom Rajabhat University</footer>
   </main>
 
 </div>
 
 <script>
-/* ===== แก้ข้อมูลตรงนี้ =====
-   link = ลิงก์ที่ปุ่มหลักจะเปิด (Colab หรือ Drive)
-   type = "colab" | "pdf" | "drive" | "app"                         */
 const WORKS = [
-  { title:"Transaction, Concurrency & Recovery (MySQL / InnoDB)", desc:"โน้ตบุ๊ก Colab เรื่องทรานแซกชัน การทำงานพร้อมกัน และการกู้คืนข้อมูลบน MySQL (InnoDB)", type:"colab",
-    link:"https://colab.research.google.com/drive/13BjxxXaivfA6MX6x4Plh6jIczTwOJvtO?usp=sharing" },
-  { title:"Club Recommendation Graph ด้วย Neo4j", desc:"เอกสารออกแบบกราฟแนะนำชมรมด้วย Neo4j", type:"pdf",
-    link:"https://drive.google.com/file/d/1HoP4TRbRENGHdThw7UrPjYJeXxpz14Dk/view?usp=sharing" },
-  { title:"Flower Recommender System (10 users, 12 flowers)", desc:"โน้ตบุ๊กระบบแนะนำดอกไม้ ใช้ข้อมูลผู้ใช้ 10 คนกับดอกไม้ 12 ชนิด", type:"drive",
-    link:"https://colab.research.google.com/drive/1caLO0FuKrAdIsE95sTMYLVsM-qGiAc6J?usp=sharing" },
-  { title:"Flower Recommender System เชื่อมต่อ Neo4j", desc:"โน้ตบุ๊กระบบแนะนำดอกไม้ที่เก็บข้อมูลเป็นกราฟบน Neo4j", type:"colab",
-    link:"https://colab.research.google.com/drive/1carNej5QFN3itsfvnJW_LWAhx3AzqwM6?usp=sharing" },
-  { title:"Flower Recommender System", desc:"เว็บแอประบบแนะนำดอกไม้ สร้างด้วย Streamlit พร้อมสไลด์นำเสนอและซอร์สโค้ด", type:"app", hero:true,
-    extra:[
-      {label:"เปิดเว็บแอป", href:"https://flowerrecommendersystem-4rmsr7ntylr7sjqcsgchbv.streamlit.app/", main:true},
-      {label:"สไลด์นำเสนอ (PDF)", href:"https://drive.google.com/file/d/1XJGPUqpy8E8kORY7-WBJ2NQGBNg_X5S3/view?usp=sharing"},
-      {label:"ซอร์สโค้ด", href:"https://github.com/song03062547-stack/FlowerRecommenderSystem"}
-    ] }
+  { 
+    title: "Transaction, Concurrency & Recovery (MySQL / InnoDB)", 
+    desc: "โน้ตบุ๊ก Colab เรื่องทรานแซกชัน การทำงานพร้อมกัน และการกู้คืนข้อมูลบน MySQL (InnoDB)", 
+    type: "colab",
+    link: "https://colab.research.google.com/drive/13BjxxXaivfA6MX6x4Plh6jIczTwOJvtO?usp=sharing" 
+  },
+  { 
+    title: "Club Recommendation Graph ด้วย Neo4j", 
+    desc: "เอกสารออกแบบกราฟแนะนำชมรมด้วย Neo4j", 
+    type: "pdf",
+    link: "https://drive.google.com/file/d/1HoP4TRbRENGHdThw7UrPjYJeXxpz14Dk/view?usp=sharing" 
+  },
+  { 
+    title: "Flower Recommender System (10 users, 12 flowers)", 
+    desc: "โน้ตบุ๊กระบบแนะนำดอกไม้ ใช้ข้อมูลผู้ใช้ 10 คนกับดอกไม้ 12 ชนิด", 
+    type: "drive",
+    link: "https://colab.research.google.com/drive/1caLO0FuKrAdIsE95sTMYLVsM-qGiAc6J?usp=sharing" 
+  },
+  { 
+    title: "Flower Recommender System เชื่อมต่อ Neo4j", 
+    desc: "โน้ตบุ๊กระบบแนะนำดอกไม้ที่เก็บข้อมูลเป็นกราฟบน Neo4j", 
+    type: "colab",
+    link: "https://colab.research.google.com/drive/1carNej5QFN3itsfvnJW_LWAhx3AzqwM6?usp=sharing" 
+  },
+  { 
+    title: "Flower Recommender System", 
+    desc: "เว็บแอประบบแนะนำดอกไม้ สร้างด้วย Streamlit พร้อมสไลด์นำเสนอและซอร์สโค้ด", 
+    type: "app", 
+    hero: true,
+    extra: [
+      { label: "เปิดเว็บแอป", href: "https://flowerrecommendersystem-4rmsr7ntylr7sjqcsgchbv.streamlit.app/", primary: true },
+      { label: "สไลด์นำเสนอ (PDF)", href: "https://drive.google.com/file/d/1XJGPUqpy8E8kORY7-WBJ2NQGBNg_X5S3/view?usp=sharing" },
+      { label: "ซอร์สโค้ด", href: "https://github.com/song03062547-stack/FlowerRecommenderSystem" }
+    ] 
+  }
 ];
-/* ===== จบส่วนที่ต้องแก้ ===== */
 
-const kindLabel = {pdf:"เอกสาร PDF", colab:"Google Colab", drive:"โน้ตบุ๊ก (Google Drive)", app:"เว็บแอป"};
-const mainLabel = {pdf:"เปิดไฟล์ PDF", colab:"เปิดใน Colab", drive:"เปิดไฟล์"};
-const btn = (label, href, main) =>
-  `<a class="btn${main ? " main" : ""}" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
+const kindLabel = { pdf: "เอกสาร PDF", colab: "Google Colab", drive: "โน้ตบุ๊ก (Google Drive)", app: "เว็บแอปพลิเคชัน" };
+const mainLabel = { pdf: "เปิดไฟล์ PDF", colab: "เปิดใน Colab", drive: "เปิดไฟล์" };
+
+const renderBtn = (label, href, isPrimary) =>
+  `<a class="btn ${isPrimary ? "primary" : ""}" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
 
 document.getElementById("list").innerHTML = WORKS.map((w, i) => {
-  let buttons = w.link ? btn(mainLabel[w.type], w.link, true) : "";
-  if (w.extra) buttons += w.extra.map(e => btn(e.label, e.href, e.main)).join("");
-  return `<article class="work${w.hero ? " hero" : ""}" id="w${i+1}">
-    <span class="n">${String(i+1).padStart(2,"0")}</span>
-    <span class="kind">${kindLabel[w.type]}</span>
-    <h3>${w.title}</h3>
-    <p>${w.desc}</p>
-    <div class="btns">${buttons}</div>
-  </article>`;
+  let buttons = w.link ? renderBtn(mainLabel[w.type], w.link, true) : "";
+  if (w.extra) {
+    buttons += w.extra.map(e => renderBtn(e.label, e.href, e.primary)).join("");
+  }
+  return `
+    <article class="work-card ${w.hero ? "hero" : ""}" id="w${i+1}">
+      <span class="num">${String(i+1).padStart(2, "0")}</span>
+      <div>
+        <span class="kind-badge">${kindLabel[w.type]}</span>
+        <h3>${w.title}</h3>
+        <p>${w.desc}</p>
+        <div class="btns-group">${buttons}</div>
+      </div>
+    </article>
+  `;
 }).join("");
 </script>
+
 </body>
 </html>
