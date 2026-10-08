@@ -9,25 +9,26 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-main: #0a0d14;
-  --bg-sidebar: #111622;
-  --card-bg: rgba(21, 28, 44, 0.6);
+  --bg-main: #0b0f19;
+  --bg-sidebar: #111827;
+  --bg-card: #1f2937;
   --card-border: rgba(255, 255, 255, 0.08);
   
   --accent-cyan: #06b6d4;
   --accent-blue: #3b82f6;
-  --accent-indigo: #6366f1;
   --accent-amber: #f59e0b;
   --accent-green: #10b981;
   
   --text-main: #f8fafc;
-  --text-sub: #94a3b8;
+  --text-sub: #9ca3af;
   --text-muted: #64748b;
   
   --sidebar-w: clamp(280px, 24vw, 320px);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'IBM Plex Sans Thai', sans-serif;
@@ -46,85 +47,65 @@ a { color: inherit; text-decoration: none; }
   min-height: 100vh;
 }
 
-/* Sidebar Custom */
+/* Sidebar Styling */
 aside {
   background: var(--bg-sidebar);
   border-right: 1px solid var(--card-border);
-  padding: 40px 28px;
+  padding: 40px 24px;
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   overflow-y: auto;
 }
 
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+.mono-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2px solid var(--accent-amber);
+  color: var(--accent-amber);
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
 }
 
-.avatar-wrapper {
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  object-fit: cover;
-  border: 2px solid rgba(6, 182, 212, 0.4);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.status-badge {
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 14px;
-  height: 14px;
-  background-color: var(--accent-green);
-  border: 2px solid var(--bg-sidebar);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-green);
-}
-
-.user-names h1 {
+aside h1 {
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
   line-height: 1.3;
 }
 
-.user-names .en {
+.en-name {
+  color: var(--accent-amber);
   font-size: 0.88rem;
-  color: var(--accent-cyan);
   font-weight: 500;
-  margin-top: 2px;
+  margin-top: -10px;
 }
 
-.facts-list {
+.facts {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   font-size: 0.88rem;
   border-top: 1px solid var(--card-border);
-  padding-top: 20px;
+  padding-top: 18px;
 }
 
-.fact-item {
+.fact-row {
   display: flex;
   justify-content: space-between;
   gap: 12px;
 }
 
-.fact-item span:first-child { color: var(--text-muted); }
-.fact-item span:last-child { color: var(--text-sub); font-weight: 500; }
+.fact-row span:first-child { color: var(--text-muted); }
+.fact-row span:last-child { color: var(--text-sub); font-weight: 500; text-align: right; }
 
 .gh-btn {
   margin-top: auto;
@@ -134,78 +115,113 @@ aside {
   gap: 8px;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--card-border);
-  color: #fff;
+  background: #ffffff;
+  color: #111827;
   font-weight: 600;
   font-size: 0.9rem;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .gh-btn:hover {
-  background: var(--accent-cyan);
-  color: #000;
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 /* Main Area */
 main {
-  padding: clamp(32px, 5vw, 60px) clamp(24px, 5vw, 60px);
-  max-width: 900px;
+  padding: clamp(24px, 4vw, 48px);
+  max-width: 960px;
   width: 100%;
 }
 
+/* Top Sticky Floating Tab Navigation */
+.tabs-header {
+  position: sticky;
+  top: 20px;
+  z-index: 40;
+  margin-bottom: 32px;
+}
+
+.tabs-bar {
+  background: rgba(31, 41, 55, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  overflow-x: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.tab-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tab-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  color: #fff;
+  font-size: 0.75rem;
+  display: grid;
+  place-items: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
 .page-title {
-  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
   font-weight: 700;
   color: #fff;
 }
 
 .page-sub {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin: 6px 0 32px;
+  font-size: 0.92rem;
+  margin: 4px 0 24px;
 }
 
-/* Cards Wrapper */
+/* Cards List */
 .works-grid {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .work-card {
   position: relative;
-  background: var(--card-bg);
+  background: var(--bg-card);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(12px);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 24px 24px 24px 84px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  overflow: hidden;
-}
-
-.work-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--accent-cyan);
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 .work-card:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  transform: translateX(4px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.work-card:hover::before {
-  opacity: 1;
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.2);
 }
 
 .work-card .num-tag {
@@ -215,7 +231,7 @@ main {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--accent-blue);
   line-height: 1;
 }
 
@@ -226,7 +242,6 @@ main {
   padding: 2px 10px;
   border-radius: 6px;
   margin-bottom: 8px;
-  letter-spacing: 0.5px;
 }
 
 .badge.colab { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
@@ -261,33 +276,44 @@ main {
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-main);
   transition: all 0.2s ease;
 }
 
 .btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
   transform: translateY(-1px);
 }
 
 .btn.primary {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
-  color: #070d14;
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #ffffff;
 }
 
 .btn.primary:hover {
-  background: #22d3ee;
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+  background: #2563eb;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
-/* Special Hero Card for Project 5 */
+.btn.amber {
+  background: var(--accent-amber);
+  border-color: var(--accent-amber);
+  color: #0f172a;
+}
+
+.btn.amber:hover {
+  background: #d97706;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+/* Featured Hero Card (Work 5) */
 .work-card.hero-card {
-  background: linear-gradient(135deg, rgba(21, 28, 44, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
-  border: 1px solid rgba(6, 182, 212, 0.4);
-  box-shadow: 0 0 25px rgba(6, 182, 212, 0.1);
+  border: 1.5px solid var(--accent-amber);
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
 }
 
 .work-card.hero-card .num-tag {
@@ -295,19 +321,19 @@ main {
 }
 
 footer {
-  margin-top: 48px;
+  margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid var(--card-border);
   color: var(--text-muted);
   font-size: 0.82rem;
 }
 
-/* Responsive Breakdown */
+/* Responsive */
 @media (max-width: 840px) {
   .layout { grid-template-columns: 1fr; }
   aside { height: auto; position: relative; padding: 32px 20px; }
-  main { padding: 32px 20px; }
-  .work-card { padding: 20px 20px 20px 20px; }
+  main { padding: 24px 16px; }
+  .work-card { padding: 20px; }
   .work-card .num-tag { position: static; display: block; margin-bottom: 6px; }
 }
 </style>
@@ -316,36 +342,44 @@ footer {
 
 <div class="layout">
 
-  <!-- Sidebar -->
+  <!-- Sidebar ด้านซ้าย -->
   <aside>
-    <div class="profile-header">
-      <div class="avatar-wrapper">
-        <img src="profile.jpg" alt="Patomphong Chaisan" class="avatar-img" onerror="this.src='https://via.placeholder.com/80'">
-        <div class="status-badge" title="Active"></div>
-      </div>
-      <div class="user-names">
-        <h1>ปฐมพงศ์<br>ชัยสรรค์</h1>
-        <div class="en">Patomphong Chaisan</div>
-      </div>
+    <div class="mono-avatar" aria-hidden="true">ป</div>
+    <div>
+      <h1>ปฐมพงศ์<br>ชัยสรรค์</h1>
+      <p class="en-name">Patomphong Chaisan</p>
     </div>
 
-    <div class="facts-list">
-      <div class="fact-item"><span>รหัสนักศึกษา</span><span>664245039</span></div>
-      <div class="fact-item"><span>หมู่เรียน</span><span>66/44</span></div>
-      <div class="fact-item"><span>คณะ</span><span>วิทยาศาสตร์ฯ</span></div>
-      <div class="fact-item"><span>สาขา</span><span>วิทยาการคอมพิวเตอร์</span></div>
+    <div class="facts">
+      <div class="fact-row"><span>รหัสนักศึกษา</span><span>664245039</span></div>
+      <div class="fact-row"><span>หมู่เรียน</span><span>66/44</span></div>
+      <div class="fact-row"><span>คณะ</span><span>วิทยาศาสตร์และเทคโนโลยี</span></div>
+      <div class="fact-row"><span>สาขา</span><span>วิทยาการคอมพิวเตอร์</span></div>
     </div>
 
     <a class="gh-btn" href="https://github.com/song03062547-stack" target="_blank" rel="noopener">
-      <span>GitHub Profile</span> ↗
+      <span>GitHub โปรไฟล์</span> ↗
     </a>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main Area ด้านขวา -->
   <main>
-    <h2 class="page-title">ผลงานรายวิชา</h2>
-    <p class="page-sub">รวมชิ้นงานประมวลผล รายงาน และเว็บแอปพลิเคชันประจำภาคเรียน</p>
+    
+    <!-- Top Tab Navigation -->
+    <div class="tabs-header">
+      <div class="tabs-bar">
+        <a href="#w1" class="tab-item"><span class="tab-num">1</span> งานที่ 1</a>
+        <a href="#w2" class="tab-item"><span class="tab-num">2</span> Neo4j Club</a>
+        <a href="#w3" class="tab-item"><span class="tab-num">3</span> Flower Rec</a>
+        <a href="#w4" class="tab-item"><span class="tab-num">4</span> Flower + Neo4j</a>
+        <a href="#w5" class="tab-item"><span class="tab-num">5</span> เว็บแอป Streamlit</a>
+      </div>
+    </div>
 
+    <h2 class="page-title">ผลงานรายวิชา</h2>
+    <p class="page-sub">5 ชิ้นงานย่อย เปิดดูไฟล์จาก GitHub หรือลิงก์ที่เกี่ยวข้องได้ทันที</p>
+
+    <!-- Cards Grid -->
     <div class="works-grid" id="works-list"></div>
 
     <footer>
@@ -359,37 +393,37 @@ footer {
 const WORKS = [
   { 
     title: "Transaction, Concurrency & Recovery (MySQL / InnoDB)", 
-    desc: "สมุดบันทึกโค้ดเรื่องทรานแซกชัน การทำงานพร้อมกัน และการกู้คืนข้อมูลบน MySQL (InnoDB)", 
+    desc: "โน้ตบุ๊ก Colab เรื่องทรานแซกชัน การทำงานพร้อมกัน และการกู้คืนข้อมูลบน MySQL (InnoDB)", 
     badge: "colab", badgeText: "Google Colab",
     link: "https://colab.research.google.com/drive/13BjxxXaivfA6MX6x4Plh6jIczTwOJvtO?usp=sharing" 
   },
   { 
     title: "Club Recommendation Graph ด้วย Neo4j", 
-    desc: "เอกสารสรุปการออกแบบโครงสร้างกราฟสำหรับระบบแนะนำชมรม", 
+    desc: "เอกสารออกแบบกราฟแนะนำชมรมด้วย Neo4j", 
     badge: "pdf", badgeText: "เอกสาร PDF",
     link: "https://drive.google.com/file/d/1HoP4TRbRENGHdThw7UrPjYJeXxpz14Dk/view?usp=sharing" 
   },
   { 
     title: "Flower Recommender System (10 users, 12 flowers)", 
-    desc: "การประมวลผลอัลกอริทึมแนะนำดอกไม้ วิเคราะห์ชุดข้อมูลผู้ใช้และรายการดอกไม้", 
+    desc: "โน้ตบุ๊กระบบแนะนำดอกไม้ ใช้ข้อมูลผู้ใช้ 10 คนกับดอกไม้ 12 ชนิด", 
     badge: "drive", badgeText: "Google Drive / Colab",
     link: "https://colab.research.google.com/drive/1caLO0FuKrAdIsE95sTMYLVsM-qGiAc6J?usp=sharing" 
   },
   { 
     title: "Flower Recommender System เชื่อมต่อ Neo4j", 
-    desc: "การจัดเก็บและดึงข้อมูลกราฟระบบแนะนำดอกไม้ผ่าน Neo4j Database", 
+    desc: "โน้ตบุ๊กระบบแนะนำดอกไม้ที่เก็บข้อมูลเป็นกราฟบน Neo4j", 
     badge: "colab", badgeText: "Google Colab",
     link: "https://colab.research.google.com/drive/1carNej5QFN3itsfvnJW_LWAhx3AzqwM6?usp=sharing" 
   },
   { 
-    title: "Flower Recommender System Web Application", 
-    desc: "เว็บแอปพลิเคชันระบบแนะนำดอกไม้ พัฒนาด้วย Streamlit พร้อมสไลด์นำเสนอและซอร์สโค้ด", 
+    title: "Flower Recommender System (Full Application)", 
+    desc: "เว็บแอประบบแนะนำดอกไม้ สร้างด้วย Streamlit พร้อมสไลด์นำเสนอและซอร์สโค้ด", 
     badge: "app", badgeText: "Featured App",
     hero: true,
     extra: [
-      { label: "🚀 เปิดเว็บแอป", href: "https://flowerrecommendersystem-4rmsr7ntylr7sjqcsgchbv.streamlit.app/", primary: true },
+      { label: "🚀 เปิดเว็บแอป (Streamlit)", href: "https://flowerrecommendersystem-4rmsr7ntylr7sjqcsgchbv.streamlit.app/", amber: true },
       { label: "📊 สไลด์นำเสนอ (PDF)", href: "https://drive.google.com/file/d/1XJGPUqpy8E8kORY7-WBJ2NQGBNg_X5S3/view?usp=sharing" },
-      { label: "💻 GitHub Repository", href: "https://github.com/song03062547-stack/FlowerRecommenderSystem" }
+      { label: "💻 ซอร์สโค้ด GitHub", href: "https://github.com/song03062547-stack/FlowerRecommenderSystem" }
     ] 
   }
 ];
@@ -401,13 +435,13 @@ container.innerHTML = WORKS.map((w, i) => {
   
   let btnsHTML = "";
   if (w.extra) {
-    btnsHTML = w.extra.map(b => `<a href="${b.href}" target="_blank" rel="noopener" class="btn ${b.primary ? 'primary' : ''}">${b.label} ↗</a>`).join('');
+    btnsHTML = w.extra.map(b => `<a href="${b.href}" target="_blank" rel="noopener" class="btn ${b.amber ? 'amber' : ''}">${b.label} ↗</a>`).join('');
   } else {
     btnsHTML = `<a href="${w.link}" target="_blank" rel="noopener" class="btn primary">เปิดดูงาน ↗</a>`;
   }
 
   return `
-    <article class="work-card ${w.hero ? 'hero-card' : ''}">
+    <article class="work-card ${w.hero ? 'hero-card' : ''}" id="w${i+1}">
       <span class="num-tag">${num}</span>
       <div>
         <span class="badge ${w.badge}">${w.badgeText}</span>
